@@ -218,16 +218,19 @@ void bresenLine(unsigned char bits[IMAGE_SIZE][IMAGE_SIZE], int x0, int y0, int 
 		// Update error term
 		mov eax, err
 			shl eax, 1
-			mov e2, eax // Store error in e2
-			sub eax, dy
+			mov e2, eax // Store error in e2 //eax = e2
+			//sub eax, dy  //why?
+			
+			mov esi, err //esi = err
 			cmp eax, dxx
-			jl skip_x_update
-			add eax, dxx
+			jge skip_x_update
+			add esi, dxx
+			mov err, esi
 			add edx, sy
 
 			skip_x_update :
 		// Update x
-		mov eax, e2 // Load error from e2
+			mov eax, e2 // Load error from e2
 			//cmp eax, -dy
 			mov edi, dy
 			neg edi
@@ -240,17 +243,17 @@ void bresenLine(unsigned char bits[IMAGE_SIZE][IMAGE_SIZE], int x0, int y0, int 
 			add ecx, sx
 
 			skip_y_update :
-		mov eax, e2 // load error from e2
-			cmp eax, dxx
-			jl skip_err_update
+			//mov eax, e2 // load error from e2
+			//cmp eax, dxx // aready did that?
+			//jl skip_err_update
 			//add err, dxx
-			mov edi, err
-			add edi, dxx
-			mov err, edi
-			add edx, sy
+			//mov edi, err
+			//add edi, dxx
+			//mov err, edi
+			//add edx, sy
 
-			skip_err_update :
-		mov eax, err
+			//skip_err_update :
+			mov eax, err
 			mov err, eax
 			jmp loop_start
 
