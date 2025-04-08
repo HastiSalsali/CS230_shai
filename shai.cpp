@@ -209,7 +209,7 @@ void bresenLine(unsigned char bits[IMAGE_SIZE][IMAGE_SIZE], int x0, int y0, int 
 			imul eax, IMAGE_SIZE
 			add eax, edx
 			mov edi, IMAGE_SIZE
-			mul edi, edi
+			imul edi, IMAGE_SIZE
 			cmp eax, edi
 			jge skip_write
 			mov byte ptr[ebx + eax], 255
@@ -235,7 +235,7 @@ void bresenLine(unsigned char bits[IMAGE_SIZE][IMAGE_SIZE], int x0, int y0, int 
 			mov edi, dy
 			neg edi
 			cmp eax, edi
-			jl skip_y_update
+			jle skip_y_update
 			//sub err, dy
 			mov edi, err
 			sub edi, dy
@@ -253,8 +253,7 @@ void bresenLine(unsigned char bits[IMAGE_SIZE][IMAGE_SIZE], int x0, int y0, int 
 			//add edx, sy
 
 			//skip_err_update :
-			mov eax, err
-			mov err, eax
+	
 			jmp loop_start
 
 			done :
