@@ -167,8 +167,8 @@ void bresenLine(unsigned char bits[IMAGE_SIZE][IMAGE_SIZE], int x0, int y0, int 
 	// sx = direction of x, sy = direction of y
 	// err = error; error from the previous point
 
-	int dxx = x1 - x0;
-	int dy = y1 - y0;
+	int dxx = abs(x1 - x0);
+	int dy = abs(y1 - y0);
 
 	int sx = (x1 - x0 > 0) ? 1 : -1; // Step direction for x
 	int sy = (y1 - y0 > 0) ? 1 : -1; // Step direction for y
